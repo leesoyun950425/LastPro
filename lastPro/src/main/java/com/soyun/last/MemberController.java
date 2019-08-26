@@ -10,6 +10,7 @@ import javax.xml.ws.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jin.mail.JinsMail;
@@ -34,12 +35,12 @@ public class MemberController {
 		memberDTO.setAuthKey('0');
 		memberDTO.setTotaddr();
 		memberDTO.setName(memberDTO.getName()+"_"+memberDTO.getId());
+		memberDAO.insert(memberDTO);
 		//인증메일보내기
 		JinsMail mail = new JinsMail();
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		memberDAO.insert(memberDTO);
 		String id = "\"http://localhost:9002/last/authkey?id="+memberDTO.getId()+"\"";
 		mail.SendMail(memberDTO.getEmail(), "가입완료 메일입니다.", "<a href="+id+">회원가입 인증하기</a>");
 	}
@@ -71,14 +72,14 @@ public class MemberController {
 	//인증키 인증된 처리
 	@RequestMapping("authkey")
 	public void authkey(String id) {
-		if("0".equals(memberDAO.select(id).getAuthkey()))
+		if('0'==(memberDAO.select(id).getAuthkey()))
 			memberDAO.update(id);
 		else
 			System.out.println("나중에 이미 인증됐을 경우 홈으로 돌려보내는 처리 할 장소");
 	}
 	//로그인하기
 	@RequestMapping("login")
-	public String login(String id, String pw,HttpServletResponse response) throws IOException {
+	public String login(String id, String pw,HttpServletResponse response,Model model) throws IOException {
 		MemberDTO dto = memberDAO.select(id);
 		char authkey = memberDAO.select(id).getAuthkey();
 		if(dto!=null) {
@@ -90,6 +91,7 @@ public class MemberController {
 					out.println("alert('인증되지 않은 아이디입니다!!이메일에서 확인 후 로그인해주세요.')");
 					out.println("</script>");
 					out.flush();
+					model.addAttribute("loginPage",tool.login());
 					return "loginPage";
 				}
 				response.setContentType("text/html; charset=UTF-8");
@@ -139,9 +141,10 @@ public class MemberController {
 		String id = memberDTO.getId();
 		MemberDTO dto = memberDAO.select(id);
 		JinsMail mail = new JinsMail();
+		String pw = "\"http://localhost:9002/last/updatePw\"";
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		mail.SendMail(dto.getEmail(), "찾으신 아이디입니다.","찾은 비밀번호는 "+ dto.getPw());
+		mail.SendMail(dto.getEmail(), "찾으신 아이디입니다.","<a href="+pw+">회원가입 인증하기</a>");
 	}
 }

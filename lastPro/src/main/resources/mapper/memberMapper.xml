@@ -25,6 +25,9 @@
 		<result property="tel" column="tel" />
 		<result property="email" column="email" />
 		<result property="birth" column="birth" />
+		<result property="authkey" column="authkey" />
+		<result property="roadaddr" column="roadaddr" />
+		<result property="totaddr" column="totaddr" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="rsMap">
@@ -33,7 +36,7 @@
 
 	<insert id="insert" parameterType="memberDTO">
 		INSERT INTO member
-		VALUES(#{id},#{pw},#{name},#{tel},#{email},#{birth},#{authkey},#{roadaddr},#{totaddr},chatRoom_seq.NEXTVAL)
+		VALUES(#{id},#{pw},#{name},#{tel},#{email},#{birth},#{authkey},#{roadaddr},#{totaddr})
 	</insert>
 	
 	<update id="update" parameterType="memberDTO">
