@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jin.mail.JinsMail;
 
+import jdk.nashorn.internal.ir.annotations.Reference;
+
 @Controller
 public class MemberController {
 
@@ -41,7 +43,7 @@ public class MemberController {
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		String id = "\"http://localhost:9002/last/authkey?id="+memberDTO.getId()+"\"";
+		String id = "\"http://localhost:8899/last/authkey?id="+memberDTO.getId()+"\"";
 		mail.SendMail(memberDTO.getEmail(), "가입완료 메일입니다.", "<a href="+id+">회원가입 인증하기</a>");
 	}
 	
@@ -141,10 +143,23 @@ public class MemberController {
 		String id = memberDTO.getId();
 		MemberDTO dto = memberDAO.select(id);
 		JinsMail mail = new JinsMail();
-		String pw = "\"http://localhost:9002/last/updatePw\"";
+		String pw = "\"http://localhost:8899/last/updatePw?id="+dto.getId()+"\"";
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		mail.SendMail(dto.getEmail(), "찾으신 아이디입니다.","<a href="+pw+">회원가입 인증하기</a>");
+		mail.SendMail(dto.getEmail(), "비밀번호 변경메일 입니다.","<a href="+pw+">비밀번호 변경하기</a>");
 	}
+	
+	//비밀번호 찾고 변경하기
+	@RequestMapping("updatePw")
+	public void updatePw(MemberDTO memberDTO,Model model) {
+		String id = memberDTO.getId();
+		MemberDTO dto = memberDAO.select(id);
+		model.addAttribute("id",dto.getId());
+	}
+	@RequestMapping("updatePw2")
+	public void updatePw2(MemberDTO memberDTO) {
+		memberDAO.updatePw(memberDTO);
+	}
+	
 }

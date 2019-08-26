@@ -132,3 +132,32 @@ a{
 	font-size: 100%;
 	border: none rgba(0, 0, 0, 0);
 }
+/* 비밀번호 변경하기 */
+#updatePw{
+	margin: 1em auto;
+	padding: 1em 2em;
+	background-color: #e7e7e7;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 300px;
+	display: block;
+}
+.changeId{
+	margin-bottom: 0.3em;
+	display: block;
+	padding: 0.5em 0.6em;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align: middle;
+	box-sizing: border-box; 
+}
+#change{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}

@@ -35,6 +35,15 @@ $(function() {
 			alert("가입완료!!");
 		}
 	})
+	$("#change").click(function() {
+		var pw = $("#pw").val();
+		if(pw.search("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{8,}$")){
+			alert("최소 8자리 숫자,문자 특수문자 각각 1개 이상 포함해주세요.");
+			return false;
+		}else{
+			alert("변경완료!");
+		}
+	})
 })
 
 

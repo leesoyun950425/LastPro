@@ -28,6 +28,10 @@ public class MemberDAO {
 	public void update(String id) {
 		mymy.update("memberDAO.update",id);
 	}
+	public void updatePw(MemberDTO memberDTO) {
+		mymy.update("memberDAO.updatePw",memberDTO);
+	}
+	
 	public void delete(MemberDTO memberDTO) {
 		mymy.delete("memberDAO.delete",memberDTO);
 	}
