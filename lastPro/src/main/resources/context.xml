@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		<!-- 어노테이션 쓰고싶을때 셋팅 xmls:context namespaces 가서 context체크-->
+<!-- 프로젝트 전반에 영향을 미치는 파일 -->
+<!-- bean에서 싱글톤으로 만들어줘~ -->
+<!-- com.itbank.mvc10밑에 싱글톤 만드는 어노테이션 다 찾기(코드오픈 되있는거) -->
+<context:component-scan base-package="com.soyun.last"></context:component-scan>
+
+
+<bean id="myBatis" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="myConfig"></constructor-arg>
+</bean>
+
+<!--property가 set메소드 통해서 초기화 -->
+<bean id="myConfig" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<property name="dataSource" ref="dbcp"></property>
+</bean>
+
+<!-- property값이 위치한 주소 -->
+<context:property-placeholder location="classpath:config/db.properties"/>
+
+<bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="${jdbc.driver}"></property>
+	<property name="url" value="${jdbc.url}"></property>
+	<property name="username" value="${jdbc.user}"></property>
+	<property name="password" value="${jdbc.pw}"></property>
+</bean>
+
+<!-- Mail 인증 관련 -->
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<property name="host" value="smtp.gmail.com" />
+	<property name="port" value="587" />
+	<property name="username" value="leesoyun702@gmail.com" />
+	<property name="password" value="verycuteso0425" />
+	<property name="javaMailProperties">
+		<props>
+			<prop key="mail.transport.protocol">smtp</prop>
+			<prop key="mail.smtp.auth">true</prop>
+			<prop key="mail.smtp.starttls.enable">true</prop>
+			<prop key="mail.debug">true</prop>
+		</props>
+	</property>
+</bean>
+
+</beans>

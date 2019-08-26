@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberDAO">
+
+	<select id="select" parameterType="String" resultMap="rsMap">
+		SELECT
+		*
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectId" parameterType="memberDTO" resultMap="rsMap">
+		SELECT
+		*
+		FROM member
+		WHERE email = #{email}
+	</select>
+	 
+	<resultMap type="memberDTO" id="rsMap">
+		<result property="id" column="id" />
+		<result property="pw" column="pw" />
+		<result property="name" column="name" />
+		<result property="tel" column="tel" />
+		<result property="email" column="email" />
+		<result property="birth" column="birth" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="rsMap">
+		SELECT * FROM member
+	</select>
+
+	<insert id="insert" parameterType="memberDTO">
+		INSERT INTO member
+		VALUES(#{id},#{pw},#{name},#{tel},#{email},#{birth},#{authkey},#{roadaddr},#{totaddr},chatRoom_seq.NEXTVAL)
+	</insert>
+	
+	<update id="update" parameterType="memberDTO">
+		UPDATE member
+		SET
+		authkey=1
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="memberDTO">
+		DELETE FROM member WHERE
+		id = #{id}
+	</delete>
+
+</mapper>

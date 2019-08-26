@@ -1,0 +1,5 @@
+$(function() {
+	$("#searchId").click(function() {
+		
+	})
+})
