@@ -136,8 +136,7 @@ public class MemberController {
 	public void searchPw() {}
 	@RequestMapping("findPw")
 	public void findPw(MemberDTO memberDTO) {
-		String id = memberDTO.getId();
-		MemberDTO dto = memberDAO.select(id);
+		MemberDTO dto = memberDAO.selectPw(memberDTO);
 		JinsMail mail = new JinsMail();
 		String pw = "\"http://localhost:8899/last/updatePw?id="+dto.getId()+"\"";
 		mail.setId("leesoyun702");

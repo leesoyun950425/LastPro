@@ -25,6 +25,9 @@ public class MemberDAO {
 	public MemberDTO selectId(MemberDTO memberDTO) {
 		return mymy.selectOne("memberDAO.selectId",memberDTO);
 	}
+	public MemberDTO selectPw(MemberDTO memberDTO) {
+		return mymy.selectOne("memberDAO.selectPw",memberDTO);
+	}
 	public void update(String id) {
 		mymy.update("memberDAO.update",id);
 	}

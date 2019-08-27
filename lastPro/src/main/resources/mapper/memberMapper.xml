@@ -17,6 +17,13 @@
 		FROM member
 		WHERE email = #{email} and name = #{name}
 	</select>
+	
+	<select id="selectPw" parameterType="memberDTO" resultMap="rsMap">
+		SELECT
+		*
+		FROM member
+		WHERE id = #{id} and name = #{name}
+	</select>
 	 
 	<resultMap type="memberDTO" id="rsMap">
 		<result property="id" column="id" />

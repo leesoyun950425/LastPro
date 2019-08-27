@@ -9,13 +9,33 @@ $(function() {
 				"name" : name,
 				"email" :email
 			},
-			success : function(result) {
+			success : function() {
 				alert("메일이 발송되었습니다!!")
 			},
-			error : function(result) {
+			error : function() {
 				alert("등록된 정보가 없습니다!!")
 				location.href = "searchId";
 			}
+		})
+	})
+	
+	$("#findPw").click(function() {
+		var id = $("#id").val();
+		var name = $("#name").val();
+		$.ajax({
+			url : "findPw",
+			data : {
+				"id" : id,
+				"name" : name
+			},
+			success : function() {
+				alert("등록된 메일로 발송했습니다!!")
+			},
+			error : function() {
+				alert("등록된 정보가 없습니다!!")
+				location.href = "searchPw";
+			}
+			
 		})
 	})
 })

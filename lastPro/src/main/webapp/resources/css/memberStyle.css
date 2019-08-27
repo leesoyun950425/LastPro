@@ -132,6 +132,16 @@ a{
 	font-size: 100%;
 	border: none rgba(0, 0, 0, 0);
 }
+
+#findPw{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}
 /* 비밀번호 변경하기 */
 #updatePw{
 	margin: 1em auto;
