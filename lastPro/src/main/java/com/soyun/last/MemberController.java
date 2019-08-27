@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class MemberController {
 	public void insert(MemberDTO memberDTO) {
 		memberDTO.setAuthKey('0');
 		memberDTO.setTotaddr();
-		memberDTO.setName(memberDTO.getName()+"_"+memberDTO.getId());
+		memberDTO.setName(memberDTO.getName());
 		memberDAO.insert(memberDTO);
 		//인증메일보내기
 		JinsMail mail = new JinsMail();
@@ -55,11 +56,6 @@ public class MemberController {
 			model.addAttribute("result","중복안됨");
 		}
 	}
-	
-	/*
-	 * @RequestMapping("update") public void update(MemberDTO memberDTO) {
-	 * memberDAO.update(memberDTO); }
-	 */
 	
 	@RequestMapping("delete")
 	public void delete(MemberDTO memberDTO) {
@@ -161,5 +157,4 @@ public class MemberController {
 	public void updatePw2(MemberDTO memberDTO) {
 		memberDAO.updatePw(memberDTO);
 	}
-	
 }

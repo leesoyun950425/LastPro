@@ -15,7 +15,7 @@
 		SELECT
 		*
 		FROM member
-		WHERE email = #{email}
+		WHERE email = #{email} and name = #{name}
 	</select>
 	 
 	<resultMap type="memberDTO" id="rsMap">
@@ -43,6 +43,14 @@
 		UPDATE member
 		SET
 		authkey=1
+		WHERE
+		id = #{id}
+	</update>
+	
+	<update id="updatePw" parameterType="memberDTO">
+		UPDATE member
+		SET
+		pw = #{pw}
 		WHERE
 		id = #{id}
 	</update>
