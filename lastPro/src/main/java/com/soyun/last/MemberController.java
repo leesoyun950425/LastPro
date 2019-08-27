@@ -98,6 +98,7 @@ public class MemberController {
 				out.println("alert('로그인 성공!!')");
 				out.println("</script>");
 				out.flush();
+				model.addAttribute("id",dto.getId());
 				return "success";
 			}else {
 				response.setContentType("text/html; charset=UTF-8");
